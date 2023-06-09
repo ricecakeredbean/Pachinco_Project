@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: MapSpawnData
   m_EditorClassIdentifier: 
   mapDatasList:
-  - MapVertiInterval: 1
-    MapHorizonInterval: 0
+  - MapInterval:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 300
+      height: 300
     MapPrefab:
     - {fileID: 4904020143961224511, guid: 41f09d82ccc05184990ae88d60a3881c, type: 3}
     - {fileID: 8906843746069448214, guid: ad50326a724c5b146860b7f39d2f9dfa, type: 3}
     - {fileID: 8864675949570327362, guid: e5d7ac8372f6481428007d5deb3c06d3, type: 3}
     StartMap: {fileID: 4451332922652537485, guid: 723fe1faf72fdca4b875fd5aedc6b6a9, type: 3}
     BossMap: {fileID: 1440504137808020799, guid: 8b1ec54476442c14aa02cba2d1745ca5, type: 3}
-    StartMapPos: {x: 0, y: 0}
-    BossMapPos: {x: 0, y: 0}
+    StartMapPos: {x: 0, y: -100}
+    BossMapPos: {x: 0, y: -2000}

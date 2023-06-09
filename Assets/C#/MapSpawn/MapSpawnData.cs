@@ -12,8 +12,7 @@ public class MapSpawnData : ScriptableObject
 public class MapData
 {
     [Header("Interval")]
-    public float MapVertiInterval;
-    public float MapHorizonInterval;
+    public Rect MapInterval;
 
     [Header("MapPrefab")]
     public List<RectTransform> MapPrefab = new();
@@ -24,12 +23,13 @@ public class MapData
     public Vector2 StartMapPos;
     public Vector2 BossMapPos;
 
-    public MapData(float mapVertiInterval, float mapHorizonInterval, List<RectTransform> mapPrefab, RectTransform startMap, RectTransform bossMap)
+    public MapData(Rect mapVertiInterval, List<RectTransform> mapPrefab, RectTransform startMap, RectTransform bossMap, Vector2 startMapPos, Vector2 bossMapPos)
     {
-        MapVertiInterval = mapVertiInterval;
-        MapHorizonInterval = mapHorizonInterval;
+        MapInterval = mapVertiInterval;
         MapPrefab = mapPrefab;
         StartMap = startMap;
         BossMap = bossMap;
+        StartMapPos = startMapPos;
+        BossMapPos = bossMapPos;
     }
 }

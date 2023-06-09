@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private RectTransform content;
 
-    private void Start()
+    private void Awake()
     {
         Instance = GetComponent<UIManager>();
     }
@@ -17,6 +17,6 @@ public class UIManager : MonoBehaviour
     [ContextMenu("ResetContent")]
     public void ResetContent()
     {
-        content.position = new Vector2(0, 0);
+        content.position = Vector2.zero;
     }
 }
