@@ -10,6 +10,7 @@ public struct Game_Coin
 {
     public int Coin;
     public GameObject[] Item;
+    public GameObject[] ResetButton;
     public GameObject[] Position;
     public Text[] Name;
     public Text[] _Price;
@@ -62,8 +63,38 @@ public class Main : MonoBehaviour
     public void Item_Instantiate()
     {
         GameObject ClickObject = EventSystem.current.currentSelectedGameObject;
-        if(ClickObject != null)
-            //누를때마다 10코인차감 10코인 없으면 안돌아가게 
+       
+        if (ClickObject != null && Coin_Use.Coin >= 10)
+        {
+
+            Coin_Use.Coin -= 10;
+            for (int reset = 0; reset < 3; reset++)
+            {
+                Coin_Use.ResetButton[reset].gameObject.SetActive(true);
+                Coin_Use.ResetButton[reset].GetComponent<Item>().Count = 3;
+                Coin_Use.Name[reset].gameObject.SetActive(true);
+            }
+            
+            for (int start = 0; start < Coin_Use.UseAfter.Count; start++)
+            {
+                if (Coin_Use.UseAfter[start] != null)
+                {
+                    Destroy(Coin_Use.UseAfter[start]);
+                }
+            }
+            Coin_Use.UseAfter.Clear();
+        }
+        else if (Coin_Use.Coin < 10)
+            throw new Exception("Stop");
+        //foreach (var a in Coin_Use.UseAfter)
+        //{
+        //    if(a != null)
+        //    {
+        //        Destroy(a);
+        //    }
+
+        //}
+
         for (int i = 0; i < 3; i++)
         {
 
@@ -73,25 +104,26 @@ public class Main : MonoBehaviour
             foreach (var a in Coin_Use.UseAfter)
             {
                 //if(Object == a)
-                while (Object == a)
+                while (Object.tag == a.tag)
                 {
                     Object = Coin_Use.Item[UnityEngine.Random.Range(0, 8)];
+                    Debug.Log(Object);
                 }
 
             }
-            //} while ();
+            //foreach (var a in Coin_Use.UseAfter)
             //{
-            //    Object = Coin_Use.Item[UnityEngine.Random.Range(0, 8)];
-            //    //Debug.Log(Object);
+            //    //if(Object == a)
+            //    while (Object == a)
+            //    {
+            //        Object = Coin_Use.Item[UnityEngine.Random.Range(0, 8)];
+            //    }
+
             //}
-            //while (Object == null)
-            //{
-            //    Object = Coin_Use.Item[UnityEngine.Random.Range(0, 8)];
-            //    //Debug.Log(Object);
-            //}
+
             if (Object != null)
             {
-                Instantiate(Object, Coin_Use.Position[i].transform.position, Quaternion.identity);
+                Coin_Use.UseAfter.Add(Instantiate(Object, Coin_Use.Position[i].transform.position, Quaternion.identity));
                 foreach (var a in Coin_Use.Price)
                 {
                     if (a.Key == Object)
@@ -114,7 +146,6 @@ public class Main : MonoBehaviour
                         break;
                     }
                 }
-                Coin_Use.UseAfter.Add(Object);
                 //for (int l = 0; l < Coin_Use.Item.Length; l++)
                 //{
                 //    if (Object == Coin_Use.Item[l])

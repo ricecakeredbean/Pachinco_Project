@@ -7,10 +7,13 @@ using UnityEngine.EventSystems;
 public class Purchase : MonoBehaviour
 {
     public Button[] confirmation = new Button[3];
+    public GameObject ClickObject;
+    public Text ChildText;
     public void Click()
     {
-        GameObject ClickObject = EventSystem.current.currentSelectedGameObject;
-        Text ChildText = ClickObject.gameObject.transform.GetChild(0).GetComponent<Text>();
+        ClickObject = EventSystem.current.currentSelectedGameObject;
+        ChildText = ClickObject.gameObject.transform.GetChild(0).GetComponent<Text>();
+        Debug.Log(ChildText.text);
         foreach (var a in Main.Instance.Coin_Use.Item_Name)
         {
             if (a.Value.ToString() == ChildText.text)
@@ -37,16 +40,24 @@ public class Purchase : MonoBehaviour
 #endif
         foreach (var a in Main.Instance.Coin_Use.Item_Name)
         {
-            if (a.Value.ToString() == Item.Instance.GameObjectText.text)
+            if (a.Value.ToString() == ChildText.text)
             {
                 foreach (var b in Main.Instance.Coin_Use.Price)
                 {
                     if (a.Key == b.Value)
                     {
-#if UNITY_EDITOR
-                        Debug.Log("Dd");
-                        Debug.Log(b.Key.gameObject.name);
-#endif
+                        ClickObject.gameObject.SetActive(false);
+                        foreach (var c in Main.Instance.Coin_Use.UseAfter)
+                        {
+                            if(b.Key.tag == c.tag)
+                                c.gameObject.SetActive(false);
+                        }
+                        foreach(var d in Main.Instance.Coin_Use.Name)
+                        {
+                            if(b.Value == d.text)
+                                d.gameObject.SetActive(false);
+                        }
+
                     }
                 }
             }

@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Coin_Use:
-    Coin: 100
+    Coin: 500
     Item:
     - {fileID: 6324010886995420673, guid: 709eaeb399d03e348b9fc5af7859061a, type: 3}
     - {fileID: 3384932739950214199, guid: 4df79cd8e82d148469d62ffecc4278f3, type: 3}
@@ -1379,6 +1379,10 @@ MonoBehaviour:
     - {fileID: 4686508151145944981, guid: e22b0d9eefb57c14d883172f3fd465da, type: 3}
     - {fileID: 3447012368225763061, guid: 6e3fc7f9f99e1d04f8fe6d9fa7a9dac5, type: 3}
     - {fileID: 5029639516053495940, guid: c1c7f0070cfa6d949aa5e5f65b013afe, type: 3}
+    ResetButton:
+    - {fileID: 855757235}
+    - {fileID: 1797195134}
+    - {fileID: 1752712826}
     Position:
     - {fileID: 308561737}
     - {fileID: 990180126}
@@ -1424,6 +1428,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  ClickObject: {fileID: 0}
+  ChildText: {fileID: 0}
 --- !u!1 &1118800220
 GameObject:
   m_ObjectHideFlags: 0
