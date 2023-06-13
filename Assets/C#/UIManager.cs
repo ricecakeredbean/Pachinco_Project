@@ -18,5 +18,6 @@ public class UIManager : MonoBehaviour
     public void ResetContent()
     {
         content.position = Vector2.zero;
+        content.sizeDelta = new Vector2(Screen.width, Screen.height * 2);
     }
 }
