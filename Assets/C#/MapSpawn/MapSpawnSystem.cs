@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class MapSpawnSystem : MonoBehaviour
 {
-    [SerializeField] private MapSpawnData mapSpawndata;
+    [SerializeField] private MapData_Scriptable mapDatas;
 
     [SerializeField] private RectTransform content;
 
-    private int mapMaxVertiIndex = 8;
-    private int mapVertiIndex = 0;
-    private int mapMaxHorizonIndex = 4;
+    [SerializeField] private int mapVertiIndex;
 
     private Vector2 mapInterval;
     private Vector2 startMapPos;
@@ -30,34 +28,31 @@ public class MapSpawnSystem : MonoBehaviour
     [ContextMenu("MapSpawn")]
     public void MapSpawn()
     {
-        foreach (var data in mapSpawndata.mapDatasList)
+        RectTransform startMap = Instantiate(mapDatas.mapSpawnData.StartMap, content.transform);
+        startMap.position = startMapPos;
+
+        for (int verti = 1; verti <= mapDatas.map_Line.MapMaxVertiIndex; verti++)
         {
-            RectTransform startMap = Instantiate(data.StartMap, content.transform);
-            startMap.position = startMapPos;
+            int randomHorizonIndex = Random.Range(mapDatas.map_Line.MapHorizonCountMin, mapDatas.map_Line.MapHorizonCountMax);
 
-            for (int verti = 1; verti <= mapMaxVertiIndex; verti++)
+            for (int horizon = -1; horizon < randomHorizonIndex; horizon++)
             {
-                int randomHorizonIndex = Random.Range(2, mapMaxHorizonIndex);
+                int randomMap = Random.Range(0, mapDatas.mapSpawnData.MapPrefab.Count);
 
-                for (int horizon = -1; horizon < randomHorizonIndex; horizon++)
+                if (IsFirstVertiIndex())
                 {
-                    int randomMap = Random.Range(0, data.MapPrefab.Count);
-
-                    if (IsFirstVertiIndex())
-                    {
-                        RectTransform battleMap = Instantiate(data.MapPrefab[0], content.transform);
-                        battleMap.position = new Vector2(mapInterval.x * horizon, startMapPos.y - (mapInterval.y * verti));
-                        openHash.Add(battleMap);
-                    }
-                    RectTransform spawnMap = Instantiate(data.MapPrefab[randomMap], content.transform);
-                    spawnMap.position = new Vector2(mapInterval.x * horizon, (startMapPos.y - mapInterval.y) - (mapInterval.y * verti));
-                    openHash.Add(spawnMap);
+                    RectTransform battleMap = Instantiate(mapDatas.mapSpawnData.MapPrefab[0], content.transform);
+                    battleMap.position = new Vector2(mapInterval.x * horizon, startMapPos.y - (mapInterval.y * verti));
+                    openHash.Add(battleMap);
                 }
-                mapVertiIndex++;
+                RectTransform spawnMap = Instantiate(mapDatas.mapSpawnData.MapPrefab[randomMap], content.transform);
+                spawnMap.position = new Vector2(mapInterval.x * horizon, (startMapPos.y - mapInterval.y) - (mapInterval.y * verti));
+                openHash.Add(spawnMap);
             }
-            RectTransform bossMap = Instantiate(data.BossMap, content.transform);
-            bossMap.position = bossMapPos;
+            mapVertiIndex++;
         }
+        RectTransform bossMap = Instantiate(mapDatas.mapSpawnData.BossMap, content.transform);
+        bossMap.position = bossMapPos;
     }
 
     [ContextMenu("DestroyMap")]
