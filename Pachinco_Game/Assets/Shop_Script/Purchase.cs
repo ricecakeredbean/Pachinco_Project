@@ -9,6 +9,7 @@ public class Purchase : MonoBehaviour
     public Button[] confirmation = new Button[3];
     public GameObject ClickObject;
     public Text ChildText;
+    public ItemInventory Inventory;
     public void Click()
     {
         ClickObject = EventSystem.current.currentSelectedGameObject;
@@ -27,6 +28,13 @@ public class Purchase : MonoBehaviour
                 }
                 if (ClickObject.GetComponent<Item>().Count == 0)
                     End();
+                foreach(var b in Main.Instance.Coin_Use.Price)
+                {
+                    if(a.Key == b.Value)
+                    {
+                        Inventory.Inventory.Add(b.Key);
+                    }
+                }
 
             }
         }

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public struct Game_Coin
@@ -20,17 +21,21 @@ public struct Game_Coin
     public Text Money;
     public List<GameObject> UseAfter;
 };
+
+
 public class Main : MonoBehaviour
 {
     public static Main Instance;
     public Game_Coin Coin_Use;
     GameObject Object;
+    
     //Nullable<GameObject> Object
     string end;
 
     private void Awake()
     {
         Instance = this;
+        
     }
     void Start()
     {
@@ -60,6 +65,7 @@ public class Main : MonoBehaviour
         Item_Instantiate();
     }
 
+    
     public void Item_Instantiate()
     {
         GameObject ClickObject = EventSystem.current.currentSelectedGameObject;
