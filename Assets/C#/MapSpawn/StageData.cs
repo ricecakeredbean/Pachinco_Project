@@ -11,32 +11,30 @@ public enum StageType
     Boss
 }
 
-[CreateAssetMenu(fileName = "MapData", menuName = "MapData")]
-public class MapData_Scriptable : ScriptableObject
+[CreateAssetMenu(fileName = "StageData", menuName = "StageData", order = 0)]
+public class StageData : ScriptableObject
 {
-    public MapSpawnData mapSpawnData;
+    public StageSpawnData StageSpawnData;
     [Space]
-    public Map_Line map_Line;
+    public Stage_Line Stage_Line;
 }
 
 [System.Serializable]
-public class MapSpawnData
+public class StageSpawnData
 {
     [Header("MapPrefab")]
-    public List<RectTransform> MapPrefab = new();
-    public RectTransform StartMap;
-    public RectTransform BossMap;
+    public List<RectTransform> StagePrefab = new();
+    public RectTransform StartStage;
+    public RectTransform BossStage;
 }
 
 [System.Serializable]
-public class WeightRandom
+public class StageWeight : WeightRandomData<StageType>
 {
-    public StageType StageType;
-    public int Weight;
 }
 
 [System.Serializable]
-public class Map_Line
+public class Stage_Line
 {
     public int MapHorizonCountMin { get; private set; }
     public int MapHorizonCountMax;
@@ -47,7 +45,7 @@ public class Map_Line
     public int MinBattleCount;
 
     [Space]
-    public WeightRandom[] Weights;
+    public StageWeight[] Weights;
 }
 
 [System.Serializable]

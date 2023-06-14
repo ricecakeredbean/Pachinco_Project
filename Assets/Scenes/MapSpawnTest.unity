@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b01fae51d0a1cf40b7b2bbab3072249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSpawndata: {fileID: 11400000, guid: bcace0558c62157429c54f4957e3fa77, type: 2}
+  stageDatas: {fileID: 11400000, guid: 75c4529c726ef224d83cfe1d50ea5b53, type: 2}
   content: {fileID: 889385791}
 --- !u!1 &410041469
 GameObject:
